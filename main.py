@@ -130,8 +130,8 @@ class TextTranslatorApp(QObject):
         keyboard.release('alt')
         keyboard.release('shift')
         
-        # 250ms warm-up sleep to let the OS keyboard state stabilize and focus the editor
-        time.sleep(0.25)
+        # 400ms warm-up sleep to let browsers (Chrome/Firefox/Edge) process keyup events and focus the input field
+        time.sleep(0.40)
             
         try:
             # 1. Backup the user's original clipboard content with pyperclip
@@ -153,13 +153,19 @@ class TextTranslatorApp(QObject):
                     time.sleep(0.04)
             print(f"[Replacer] Clipboard cleared. Current value: '{pyperclip.paste()}'")
             
-            # 3. Highlight the current line from cursor back to beginning of the line
-            keyboard.send('shift+home')
-            time.sleep(0.20)  # Safe 200ms delay to let Windows OS draw highlight selection completely
+            # 3. Select all text inside the active input field (Universal Ctrl+A selection)
+            keyboard.press('ctrl')
+            time.sleep(0.04)
+            keyboard.press('a')
+            time.sleep(0.04)
+            keyboard.release('a')
+            time.sleep(0.04)
+            keyboard.release('ctrl')
+            time.sleep(0.25)  # Safe 250ms delay to let browser draw highlight selection completely
             
             # 4. Copy the highlighted text
             keyboard.send('ctrl+c')
-            time.sleep(0.10)
+            time.sleep(0.15)
             
             # 5. Poll the clipboard for up to 1.0 second until the copy completes
             text_to_translate = ""
@@ -246,7 +252,7 @@ class TextTranslatorApp(QObject):
                     time.sleep(0.04)
             
             # 3. Trigger Ctrl+V to paste the translation instantly (Slow hold Ctrl+V)
-            time.sleep(0.06)  # Let clipboard buffer settle in OS
+            time.sleep(0.12)  # Let clipboard buffer settle in OS (essential for web browsers)
             keyboard.press('ctrl')
             time.sleep(0.04)
             keyboard.press('v')
@@ -254,7 +260,7 @@ class TextTranslatorApp(QObject):
             keyboard.release('v')
             time.sleep(0.04)
             keyboard.release('ctrl')
-            time.sleep(0.25)  # Give target app 250ms to read clipboard and paste text before we restore it
+            time.sleep(0.35)  # Give target app 350ms to read clipboard and paste text before we restore it
             
             # 4. Restore the user's original clipboard content immediately
             for retry in range(5):
