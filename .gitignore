@@ -1,0 +1,23 @@
+# API keys and local configuration settings (CRITICAL - DO NOT SHARE!)
+.env
+config.json
+
+# Python compilation cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Operating system metadata
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE-specific configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
