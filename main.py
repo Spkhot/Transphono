@@ -144,41 +144,45 @@ class TextTranslatorApp(QObject):
                     time.sleep(0.04)
             print(f"[Replacer] Original clipboard backup: '{original_clipboard_text}'")
             
-            # 2. Clear the clipboard before copying to ensure we don't read stale data
+            # 2. Clear the clipboard before copying to check if user has a manual highlight active
             for retry in range(5):
                 try:
                     pyperclip.copy("")
                     break
                 except Exception:
                     time.sleep(0.04)
-            print(f"[Replacer] Clipboard cleared. Current value: '{pyperclip.paste()}'")
             
-            # 3. Select all text inside the active input field (Universal Ctrl+A selection)
-            keyboard.press('ctrl')
-            time.sleep(0.04)
-            keyboard.press('a')
-            time.sleep(0.04)
-            keyboard.release('a')
-            time.sleep(0.04)
-            keyboard.release('ctrl')
-            time.sleep(0.25)  # Safe 250ms delay to let browser draw highlight selection completely
-            
-            # 4. Copy the highlighted text
+            # Check if there is already a manual selection highlighted by the user:
+            # We send Ctrl+C immediately. If the user highlighted text manually, it will copy it.
             keyboard.send('ctrl+c')
-            time.sleep(0.15)
+            time.sleep(0.12)
             
-            # 5. Poll the clipboard for up to 1.0 second until the copy completes
-            text_to_translate = ""
-            for _ in range(20):  # 20 * 50ms = 1000ms max wait
-                time.sleep(0.05)
-                try:
-                    temp_text = pyperclip.paste().strip()
-                    if temp_text:
-                        text_to_translate = temp_text
-                        break
-                except Exception:
-                    pass
-            print(f"[Replacer] Clipboard content after copy: '{pyperclip.paste()}'")
+            text_to_translate = pyperclip.paste().strip()
+            
+            # If the user did NOT select anything manually (clipboard is empty), default to line-selection:
+            if not text_to_translate:
+                print("[Replacer] No manual selection detected. Selecting current line instead...")
+                
+                # Highlight the current line from cursor back to beginning of the line
+                keyboard.send('shift+home')
+                time.sleep(0.25)  # Safe 250ms delay to let OS draw selection completely
+                
+                # Copy the highlighted line
+                keyboard.send('ctrl+c')
+                time.sleep(0.15)
+                
+                # Poll clipboard for the auto-selected line text
+                for _ in range(15):  # 15 * 50ms = 750ms max wait
+                    time.sleep(0.05)
+                    try:
+                        temp_text = pyperclip.paste().strip()
+                        if temp_text:
+                            text_to_translate = temp_text
+                            break
+                    except Exception:
+                        pass
+            
+            print(f"[Replacer] Clipboard content after selection/copy: '{pyperclip.paste()}'")
             
             # Verify selection contents
             if not text_to_translate:

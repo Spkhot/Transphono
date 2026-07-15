@@ -75,9 +75,9 @@ Input text: {text}
             except Exception as e:
                 last_error = e
                 err_str = str(e).lower()
-                # If model is not found, deprecated, or blocked, cascade to the next one
-                if "404" in err_str or "not_found" in err_str or "not available" in err_str:
-                    print(f"[Translator] Model '{model_name}' unavailable. Attempting next fallback model...")
+                # If model is not found, deprecated, blocked, or has exceeded its daily quota, cascade to the next one
+                if any(x in err_str for x in ("404", "not_found", "not available", "429", "quota", "exhausted", "limit")):
+                    print(f"[Translator] Model '{model_name}' unavailable or quota exceeded. Attempting next fallback model...")
                     continue
                 else:
                     # For other errors (like invalid API keys), raise immediately
