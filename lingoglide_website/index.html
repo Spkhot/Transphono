@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LingoGlide — AI-Powered Desktop Text Replacer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="logo.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="LingoGlide Logo" class="logo-img">
+                <span class="logo-text">LingoGlide</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#setup">Setup</a>
+                <a href="LingoGlide.exe" class="nav-btn" download>Download</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-left">
+                <span class="badge">🔥 Standalone Windows App</span>
+                <h1>Translate Phonetic Text <br><span class="italic-serif">Instantly</span> as you Type.</h1>
+                <p class="subtitle">Write casual Hinglish/Marahtni inside any app (WhatsApp, ChatGPT, Notepad, Word, VS Code), press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>K</kbd>, and watch it instantly replace with fluent English.</p>
+                
+                <div class="hero-actions">
+                    <a href="LingoGlide.exe" class="btn btn-primary" download>
+                        <span class="btn-icon">📥</span>
+                        <span class="btn-text">Download LingoGlide.exe</span>
+                    </a>
+                    <span class="file-size">Windows Standalone • 70.6 MB</span>
+                </div>
+            </div>
+            
+            <div class="hero-right">
+                <div class="demo-window">
+                    <div class="window-header">
+                        <div class="window-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="window-title">WhatsApp Web / ChatGPT Chat Input</div>
+                    </div>
+                    <div class="window-body">
+                        <div class="chat-container">
+                            <div class="message received">
+                                <p>Hi! Can you translate this sentence for me?</p>
+                                <span class="time">10:42 AM</span>
+                            </div>
+                            <div class="chat-input-area">
+                                <div class="chat-input" id="demo-input">tu udya yeu shakto ka</div>
+                                <div class="shortcut-prompt" id="shortcut-alert">Pressing Ctrl + Alt + K ...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-container">
+            <h2 class="section-title">Why use LingoGlide?</h2>
+            <div class="grid">
+                <div class="card">
+                    <div class="card-icon">⚡</div>
+                    <h3>Smart App Detection</h3>
+                    <p>Uses native Windows APIs to toggle between Ctrl+A in browsers (WhatsApp Web, ChatGPT) and Shift+Home in text editors (Notepad, VS Code).</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Targeted Translation</h3>
+                    <p>Highlight any specific word, phrase, or multiple lines manually, and LingoGlide will translate only that highlighted portion.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🩺</div>
+                    <h3>Self-Healing Cascade</h3>
+                    <p>Automatically rotates and switches API models (Gemini 3.1, 1.5, etc.) if rate limits or quotas are hit, guaranteeing 60+ translations free daily.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔒</div>
+                    <h3>100% Private & Secure</h3>
+                    <p>Enter your own Gemini API Key in the settings dialog from the system tray. Your keys and inputs never leave your local machine.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Before vs After Comparison Section -->
+    <section class="comparison-section">
+        <div class="section-container">
+            <h2 class="section-title">One Shortcut vs Five Steps</h2>
+            <div class="comparison-grid">
+                <div class="comparison-card before">
+                    <h4>The Slow Way (Without LingoGlide)</h4>
+                    <ul>
+                        <li><span>1</span> Type: <i>"tu udya yeu shakto ka"</i></li>
+                        <li><span>2</span> Highlight & Copy the text</li>
+                        <li><span>3</span> Open browser & go to Google Translate / ChatGPT</li>
+                        <li><span>4</span> Paste, copy translated English output</li>
+                        <li><span>5</span> Go back to original app & paste</li>
+                    </ul>
+                </div>
+                <div class="comparison-card after">
+                    <h4>The LingoGlide Way</h4>
+                    <ul>
+                        <li><span>1</span> Type: <i>"tu udya yeu shakto ka"</i></li>
+                        <li><span>2</span> Press <kbd>Ctrl + Alt + K</kbd></li>
+                        <li><span>✨</span> Replaced instantly with fluent English!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Setup Guide Section -->
+    <section id="how-it-works" class="setup-section">
+        <div class="section-container">
+            <h2 class="section-title">Getting Started in 3 Steps</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">01</div>
+                    <h4>Download & Open</h4>
+                    <p>Download the executable file and double-click to run it. It will sit silently in your Windows System Tray (near the clock).</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">02</div>
+                    <h4>Paste Your API Key</h4>
+                    <p>Right-click the blue circular "E" tray icon, select "Settings", paste your free Gemini API Key, and hit Save.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">03</div>
+                    <h4>Glide to English</h4>
+                    <p>Go to WhatsApp, type your phonetic sentence, and press the global hotkey <kbd>Ctrl + Alt + K</kbd> to translate!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h5>Do I need to install Python?</h5>
+                    <p>No! The standalone executable bundles Python, PySide6, and the Gemini SDK. Just double-click the <code>.exe</code> file to run it.</p>
+                </div>
+                <div class="faq-item">
+                    <h5>Which applications are supported?</h5>
+                    <p>LingoGlide runs everywhere on Windows. It works inside Notepad, WhatsApp Desktop, Slack, ChatGPT, LinkedIn, Microsoft Word, VS Code, and browser text fields.</p>
+                </div>
+                <div class="faq-item">
+                    <h5>How does the app selection work?</h5>
+                    <p>LingoGlide dynamically reads the foreground app process name and title. It uses box selection (Ctrl+A) in browsers and chat clients, and line selection (Shift+Home) in coding and text editors.</p>
+                </div>
+                <div class="faq-item">
+                    <h5>Is it safe to use?</h5>
+                    <p>Yes. Your API key and input text are kept entirely on your computer. It never communicates with any server other than directly to the Google Gemini API endpoint.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 LingoGlide. Beautifully crafted for seamless typing.</p>
+    </footer>
+
+    <!-- Animated Typing JS Demo Script -->
+    <script>
+        const inputEl = document.getElementById('demo-input');
+        const alertEl = document.getElementById('shortcut-alert');
+        
+        const sentences = [
+            { original: "tu udya yeu shakto ka", translated: "Can you come tomorrow?" },
+            { original: "mala aaj khup bhuk lagli ahe", translated: "I am very hungry today." },
+            { original: "mi tula thodya velane call karto", translated: "I will call you in a little while." }
+        ];
+        
+        let index = 0;
+
+        function runDemoCycle() {
+            const current = sentences[index];
+            inputEl.textContent = "";
+            inputEl.classList.remove('selected');
+            alertEl.classList.remove('active');
+            
+            // Type original
+            let charIndex = 0;
+            const typingInterval = setInterval(() => {
+                inputEl.textContent += current.original[charIndex];
+                charIndex++;
+                if (charIndex >= current.original.length) {
+                    clearInterval(typingInterval);
+                    
+                    // Wait and highlight selection
+                    setTimeout(() => {
+                        inputEl.classList.add('selected');
+                        alertEl.classList.add('active');
+                        
+                        // Wait and translate
+                        setTimeout(() => {
+                            inputEl.classList.remove('selected');
+                            alertEl.classList.remove('active');
+                            inputEl.textContent = current.translated;
+                            
+                            // Loop next sentence after delay
+                            setTimeout(() => {
+                                index = (index + 1) % sentences.length;
+                                runDemoCycle();
+                            }, 3500);
+                            
+                        }, 1200);
+                    }, 1200);
+                }
+            }, 60);
+        }
+
+        // Start Demo Loop
+        setTimeout(runDemoCycle, 1000);
+    </script>
+</body>
+</html>
