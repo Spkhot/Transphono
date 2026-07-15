@@ -159,28 +159,45 @@ class TextTranslatorApp(QObject):
             
             text_to_translate = pyperclip.paste().strip()
             
-            # If the user did NOT select anything manually (clipboard is empty), default to line-selection:
+            # 2. If no manual selection, try Line Selection (Shift + Home) - Best for Notepad / VS Code
             if not text_to_translate:
-                print("[Replacer] No manual selection detected. Selecting current line instead...")
+                print("[Replacer] No manual selection. Trying line-selection (Shift+Home)...")
                 
-                # Highlight the current line from cursor back to beginning of the line
+                # Clear clipboard first
+                pyperclip.copy("")
+                
+                # Highlight current line
                 keyboard.send('shift+home')
-                time.sleep(0.25)  # Safe 250ms delay to let OS draw selection completely
+                time.sleep(0.20)
                 
-                # Copy the highlighted line
+                # Copy it
                 keyboard.send('ctrl+c')
-                time.sleep(0.15)
+                time.sleep(0.12)
                 
-                # Poll clipboard for the auto-selected line text
-                for _ in range(15):  # 15 * 50ms = 750ms max wait
-                    time.sleep(0.05)
-                    try:
-                        temp_text = pyperclip.paste().strip()
-                        if temp_text:
-                            text_to_translate = temp_text
-                            break
-                    except Exception:
-                        pass
+                text_to_translate = pyperclip.paste().strip()
+            
+            # 3. If line selection is still empty, try Box Selection (Ctrl + A) - Best for WhatsApp / ChatGPT / LinkedIn
+            if not text_to_translate:
+                print("[Replacer] Line-selection empty. Trying box-selection (Ctrl+A)...")
+                
+                # Clear clipboard first
+                pyperclip.copy("")
+                
+                # Highlight entire input field
+                keyboard.press('ctrl')
+                time.sleep(0.04)
+                keyboard.press('a')
+                time.sleep(0.04)
+                keyboard.release('a')
+                time.sleep(0.04)
+                keyboard.release('ctrl')
+                time.sleep(0.20)
+                
+                # Copy it
+                keyboard.send('ctrl+c')
+                time.sleep(0.12)
+                
+                text_to_translate = pyperclip.paste().strip()
             
             print(f"[Replacer] Clipboard content after selection/copy: '{pyperclip.paste()}'")
             
